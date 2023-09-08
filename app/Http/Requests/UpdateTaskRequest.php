@@ -22,9 +22,15 @@ class UpdateTaskRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name' => 'required|string|max:255',
             'is_completed' => 'required|boolean',
         ];
+
+        if ($this->getMethod() === 'PATCH') {
+            unset($rules['name']);
+        }
+
+        return $rules;
     }
 }

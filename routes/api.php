@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Add PATCH
-Route::apiResource('tasks', TaskController::class);
+Route::group(['prefix' => 'v1'], function () {
+    Route::apiResource('tasks', TaskController::class);
+});
