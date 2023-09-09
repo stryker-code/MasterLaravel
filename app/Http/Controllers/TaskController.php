@@ -54,9 +54,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task): JsonResponse
     {
-        return response()->json(
-            ['task' => $task->delete()],
-            Response::HTTP_NO_CONTENT
-        );
+        $task->delete();
+
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
 }
