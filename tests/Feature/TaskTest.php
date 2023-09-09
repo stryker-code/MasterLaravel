@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
@@ -12,7 +13,15 @@ class TaskTest extends TestCase
      */
     public function testGetTasks(): void
     {
-        $response = $this->get('/api/v1/tasks');
+        $uri = '/api/v1/tasks';
+
+        $response = $this->get($uri);
+
+        $this->assertEquals(Response::HTTP_UNAUTHORIZED, $response->status());
+
+        $this->actingAs(User::first());
+
+        $response = $this->get($uri);
 
         $this->assertJson($response->content());
 
