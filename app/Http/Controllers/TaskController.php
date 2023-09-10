@@ -9,7 +9,6 @@ use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cache;
 
 
 class TaskController extends Controller
@@ -19,14 +18,7 @@ class TaskController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        if (Cache::has('tasks')) {
-            $tasks = Cache::get('tasks');
-        } else {
-            $tasks = Task::all();
-            Cache::put('tasks', $tasks);
-        }
-
-        return TaskResource::collection($tasks);
+        return TaskResource::collection(Task::getTasks());
     }
 
     /**
