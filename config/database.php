@@ -4,6 +4,8 @@ use Illuminate\Support\Str;
 
 return [
 
+    'log_all_queries' => env('LOG_ALL_QUERIES', false),
+
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
