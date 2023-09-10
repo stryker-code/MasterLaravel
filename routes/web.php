@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RelationsController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('test', [WebController::class, 'test']);
+
+Route::get('one_to_one', [RelationsController::class, 'oneToOne']);
+Route::get('one_to_many', [RelationsController::class, 'oneToMany']);
+Route::get('many_to_many', [RelationsController::class, 'manyToMany']);
