@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\Api\SanctumController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1'], function () {
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::post('create', [UserController::class, 'create']);
+        Route::get('index', [UserController::class, 'index']);
+    });
 
     Route::post('tokens/create', [SanctumController::class, 'create']);
 
