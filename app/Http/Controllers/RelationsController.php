@@ -12,11 +12,9 @@ class RelationsController extends Controller
     {
         $user = User::query()->first();
 
-        $phone = 432432434222;
-
         if (!$user->phone) {
             return $user->phone()->create([
-                'phone' => $phone,
+                'phone' => fake()->phoneNumber(),
                 'operator' => 'kstar',
                 'expire_date' => Carbon::now()
             ]);
@@ -25,9 +23,7 @@ class RelationsController extends Controller
             logs()->critical($phone->user->name);
         }
 
-        return User::query()->whereHas('phone', function ($query) use ($phone) {
-            $query->where('phone', '=', $phone);
-        })->get();
+        return $phone->user->phone->user->phone;
     }
 
     public function oneToMany(): string

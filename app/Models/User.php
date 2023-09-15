@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -53,5 +54,12 @@ class User extends Authenticatable
     public function tasks(): HasMany
     {
         return $this->hasMany(TodoList::class);
+    }
+
+    public static function getUserByPhone(string $phone): Collection|array
+    {
+        return static::query()->whereHas('phone', function ($query) use ($phone) {
+            $query->where('phone', '=', $phone);
+        })->get();
     }
 }
