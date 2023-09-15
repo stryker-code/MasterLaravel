@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('user_id')->unique();
             $table->string('phone',50);
             $table->string('operator');
             $table->date('expire_date');
