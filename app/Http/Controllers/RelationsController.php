@@ -2,33 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Phone;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Services\Relations\OneToManyService;
+use App\Services\Relations\OneToOneService;
 
 class RelationsController extends Controller
 {
-    public function oneToOne(): string
+    public function oneToOne(OneToOneService $service): string
     {
-        $user = User::query()->first();
-
-        if (!$user->phone) {
-            return $user->phone()->create([
-                'phone' => fake()->phoneNumber(),
-                'operator' => 'kstar',
-                'expire_date' => Carbon::now()
-            ]);
-        } else {
-            $phone = Phone::find($user->phone->id);
-            logs()->critical($phone->user->name);
-        }
-
-        return $phone->user->phone->user->phone;
+        return dd($service->getPhoneByUser());
     }
 
-    public function oneToMany(): string
+    public function oneToMany(OneToManyService $service): string
     {
-        return __METHOD__;
+        return dd($service->getAllUsersWithTodoLists());
     }
 
     public function manyToMany(): string
