@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::create('todo_lists', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->index()->constrained();
             $table->boolean('is_done');
             $table->string('name');
             $table->timestamps();
+
+            /*
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+            */
+
         });
     }
 

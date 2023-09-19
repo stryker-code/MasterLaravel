@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Relations\ManyToManyService;
 use App\Services\Relations\OneToManyService;
 use App\Services\Relations\OneToOneService;
 
@@ -17,8 +18,8 @@ class RelationsController extends Controller
         return dd($service->getAllUsersWithTodoLists());
     }
 
-    public function manyToMany(): string
+    public function manyToMany(ManyToManyService $service): string
     {
-        return __METHOD__;
+        return dd($service->attachRegionsToStore());
     }
 }

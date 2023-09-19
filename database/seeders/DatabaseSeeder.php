@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([PhoneSeeder::class]);
         $this->call([TaskSeeder::class]);
         $this->call([TodoListSeeder::class]);
+        $this->call([RegionSeeder::class]);
+        $this->call([StoreSeeder::class]);
     }
 }
