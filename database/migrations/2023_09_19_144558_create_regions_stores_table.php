@@ -24,6 +24,8 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
+            $table->unique(['store_id', 'region_id']);
+
             /*
             $table->foreign('regions_id')->references('id')
                 ->on('regions')->onDelete('cascade');

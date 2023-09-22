@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class OneToOneService
 {
     protected Model $user;
+
     public function __construct()
     {
         $this->user = User::firstOrFail();

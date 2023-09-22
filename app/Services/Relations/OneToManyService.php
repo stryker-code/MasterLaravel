@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class OneToManyService
 {
     protected Model $user;
+
     public function __construct()
     {
         $this->user = User::firstOrFail();
