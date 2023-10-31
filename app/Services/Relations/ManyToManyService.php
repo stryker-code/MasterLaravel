@@ -25,7 +25,7 @@ class ManyToManyService
 
     public function getRegions()
     {
-        return $this->store->regions()->get();
+        return $this->store->regions()->get()->pluck('name');
     }
 
     public function getStores()
