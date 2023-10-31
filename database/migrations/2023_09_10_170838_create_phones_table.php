@@ -11,19 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todo_lists', function (Blueprint $table) {
+        Schema::create('phones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index()->constrained();
-            $table->boolean('is_done');
-            $table->string('name');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->string('phone',50);
+            $table->string('operator');
+            $table->date('expire_date');
             $table->timestamps();
-
-            /*
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
-            */
-
         });
     }
 
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todo_lists');
+        Schema::dropIfExists('phones');
     }
 };

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -44,8 +46,20 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function phone(): HasOne
+    {
+        return $this->hasOne(Phone::class);
+    }
+
     public function tasks(): HasMany
     {
         return $this->hasMany(TodoList::class);
+    }
+
+    public static function getUserByPhone(string $phone): Collection|array
+    {
+        return static::query()->whereHas('phone', function ($query) use ($phone) {
+            $query->where('phone', '=', $phone);
+        })->get();
     }
 }

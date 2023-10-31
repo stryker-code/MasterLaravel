@@ -11,19 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todo_lists', function (Blueprint $table) {
+        Schema::create('regions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index()->constrained();
-            $table->boolean('is_done');
             $table->string('name');
             $table->timestamps();
-
-            /*
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
-            */
-
         });
     }
 
@@ -32,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('todo_lists');
+        Schema::dropIfExists('regions');
     }
 };
